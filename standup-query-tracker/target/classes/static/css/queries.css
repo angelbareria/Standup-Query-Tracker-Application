@@ -1,0 +1,71 @@
+/* Queries Page Styles */
+
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.filter-group .btn {
+    margin-top: 0.5rem;
+}
+
+/* Table Enhancements */
+.table-container {
+    max-height: 600px;
+}
+
+table {
+    font-size: 0.875rem;
+}
+
+table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--light-gray);
+    z-index: 10;
+}
+
+table td {
+    vertical-align: middle;
+}
+
+table td:first-child {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Query Actions */
+.query-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters-container {
+        grid-template-columns: 1fr;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 800px;
+    }
+}

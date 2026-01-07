@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Details - Standup Query Tracker</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/query-detail.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar">
+    <a href="dashboard.html" class="navbar-brand">Standup Tracker</a>
+    <ul class="navbar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="queries.html">All Queries</a></li>
+        <li><a href="create-query.html">Create Query</a></li>
+    </ul>
+    <div class="user-info">
+        <span class="user-name" id="userName"></span>
+        <button class="btn btn-sm btn-outline" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="page-header">
+        <h1 id="queryTitle">Loading...</h1>
+        <div class="query-actions">
+            <button class="btn btn-danger" onclick="deleteQuery()">Delete</button>
+        </div>
+    </div>
+
+    <div class="detail-grid">
+        <!-- Left Column -->
+        <div class="detail-main">
+            <!-- Query Info Card -->
+            <div class="card">
+                <div class="card-title">Query Information</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">ID:</span>
+                        <span class="info-value" id="queryId">#-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Type:</span>
+                        <span class="info-value" id="queryType">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Priority:</span>
+                        <span class="info-value" id="queryPriority">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span class="info-value" id="queryStatus">-</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Description</h3>
+                    <p id="queryDescription" style="color: var(--text-secondary);">-</p>
+                </div>
+            </div>
+
+            <!-- Timeline Card -->
+            <div class="card">
+                <div class="card-title">Timeline</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">📅</div>
+                        <div class="timeline-content">
+                            <strong>Created</strong>
+                            <p id="createdDate">-</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🔄</div>
+                        <div class="timeline-content">
+                            <strong>Last Updated</strong>
+                            <p id="lastUpdated">-</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">⏰</div>
+                        <div class="timeline-content">
+                            <strong>SLA Deadline</strong>
+                            <p id="slaDeadline">-</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" id="resolvedItem" style="display: none;">
+                        <div class="timeline-icon">✅</div>
+                        <div class="timeline-content">
+                            <strong>Resolved</strong>
+                            <p id="resolvedDate">-</p>
+                            <small id="resolutionTime" style="color: var(--text-secondary);">-</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="detail-sidebar">
+            <!-- People Card -->
+            <div class="card">
+                <div class="card-title">People</div>
+                <div class="people-section">
+                    <div class="person-item">
+                        <span class="person-label">Raised By:</span>
+                        <span class="person-name" id="raisedBy">-</span>
+                    </div>
+                    <div class="person-item">
+                        <span class="person-label">Assigned To:</span>
+                        <span class="person-name" id="assignedTo">Unassigned</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions Card -->
+            <div class="card">
+                <div class="card-title">Actions</div>
+
+                <!-- Assign User -->
+                <div class="form-group">
+                    <label class="form-label">Assign to User</label>
+                    <select id="assignUserSelect" class="form-control">
+                        <option value="">Select user...</option>
+                    </select>
+                    <button class="btn btn-primary btn-block" onclick="assignUser()" style="margin-top: 0.5rem;">
+                        Assign
+                    </button>
+                </div>
+
+                <!-- Update Status -->
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label class="form-label">Update Status</label>
+                    <select id="statusSelect" class="form-control">
+                        <option value="OPEN">Open</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="RESOLVED">Resolved</option>
+                        <option value="CLOSED">Closed</option>
+                    </select>
+                    <button class="btn btn-secondary btn-block" onclick="updateStatus()" style="margin-top: 0.5rem;">
+                        Update Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/query-detail.js"></script>
+</body>
+</html>

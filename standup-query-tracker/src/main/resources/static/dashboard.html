@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Standup Query Tracker</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar">
+    <a href="dashboard.html" class="navbar-brand">Standup Tracker</a>
+    <ul class="navbar-menu">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="queries.html">All Queries</a></li>
+        <li><a href="create-query.html">Create Query</a></li>
+    </ul>
+    <div class="user-info">
+        <span class="user-name" id="userName"></span>
+        <button class="btn btn-sm btn-outline" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="page-header">
+        <h1>Dashboard</h1>
+        <a href="create-query.html" class="btn btn-primary">+ New Query</a>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card stat-primary">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+                <h3 id="totalQueries">0</h3>
+                <p>Total Queries</p>
+            </div>
+        </div>
+
+        <div class="stat-card stat-info">
+            <div class="stat-icon">📝</div>
+            <div class="stat-content">
+                <h3 id="openQueries">0</h3>
+                <p>Open Queries</p>
+            </div>
+        </div>
+
+        <div class="stat-card stat-danger">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-content">
+                <h3 id="overdueQueries">0</h3>
+                <p>Overdue</p>
+            </div>
+        </div>
+
+        <div class="stat-card stat-success">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+                <h3 id="myRaisedQueries">0</h3>
+                <p>My Raised</p>
+            </div>
+        </div>
+
+        <div class="stat-card stat-warning">
+            <div class="stat-icon">👤</div>
+            <div class="stat-content">
+                <h3 id="myAssignedQueries">0</h3>
+                <p>Assigned to Me</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Queries -->
+    <div class="card">
+        <div class="card-title flex-between">
+            <span>Recent Queries</span>
+            <a href="queries.html" class="btn btn-sm btn-outline">View All</a>
+        </div>
+        <div class="table-container">
+            <table id="recentQueriesTable">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Raised By</th>
+                    <th>SLA</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="recentQueriesBody">
+                <tr>
+                    <td colspan="7" class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <p>Loading queries...</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

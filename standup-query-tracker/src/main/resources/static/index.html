@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Standup Query Tracker</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Standup Query Tracker</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="john@company.com"
+                        required
+                >
+                <span class="form-error" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        required
+                >
+                <span class="form-error" id="passwordError"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                Sign In
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script>
+    // Check if already logged in
+    if (isAuthenticated()) {
+        window.location.href = 'dashboard.html';
+    }
+
+    // Handle form submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        // Clear previous errors
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('passwordError').textContent = '';
+
+        if (!email || !password) {
+            showToast('Please fill in all fields', 'error');
+            return;
+        }
+
+        try {
+            showLoading();
+            const user = await API.login(email, password);
+
+            // Save user to localStorage
+            saveCurrentUser(user);
+
+            hideLoading();
+            showToast('Login successful!', 'success');
+
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 500);
+        } catch (error) {
+            hideLoading();
+            showToast(error.message || 'Login failed. Please check your credentials.', 'error');
+        }
+    });
+</script>
+</body>
+</html>
